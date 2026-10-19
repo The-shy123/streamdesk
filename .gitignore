@@ -1,0 +1,22 @@
+# Build products, dependency downloads and local runtime data
+/build/
+.DS_Store
+__pycache__/
+*.pyc
+*.sdr
+*.sdr.partial
+*.jsonl
+.env
+.env.*
+!.env.example
+
+# Local project planning, personal learning and application notes (kept on disk)
+/PROJECT.md
+/problem.md
+/StreamDesk_First_Application_Prompt.md
+/docs/first_application_plan.md
+/docs/first_application_pack.md
+/docs/internship_readiness.md
+/docs/progress.md
+/docs/environment.md
+/docs/platform_validation.md

@@ -1,0 +1,26 @@
+cmake_minimum_required(VERSION 3.20)
+project(StreamDesk LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+include(CTest)
+add_subdirectory(libs/streamcore)
+
+add_executable(streamcore_example examples/version.cpp)
+target_link_libraries(streamcore_example PRIVATE StreamCore)
+add_executable(streamdesk_inspect examples/inspect_numeric.cpp)
+target_link_libraries(streamdesk_inspect PRIVATE StreamCore)
+add_library(StreamDeskCli STATIC apps/cli/console.cpp apps/cli/replay.cpp)
+target_include_directories(StreamDeskCli PUBLIC "${PROJECT_SOURCE_DIR}/apps/cli")
+target_link_libraries(StreamDeskCli PUBLIC StreamCore)
+add_executable(streamdesk_replay examples/replay_numeric.cpp)
+target_link_libraries(streamdesk_replay PRIVATE StreamDeskCli)
+add_executable(streamdesk_records examples/records.cpp)
+target_link_libraries(streamdesk_records PRIVATE StreamDeskCli)
+
+option(STREAMDESK_BUILD_SERVER "Build the local single-source TCP demo" OFF)
+if(STREAMDESK_BUILD_SERVER)
+    add_subdirectory(apps/server)
+endif()

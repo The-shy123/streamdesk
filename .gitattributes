@@ -1,0 +1,2 @@
+# Exclude vendored dependencies from GitHub language statistics.
+third_party/** linguist-vendored
